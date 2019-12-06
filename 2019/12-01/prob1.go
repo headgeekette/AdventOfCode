@@ -2,52 +2,46 @@ package main
 
 import (
 	"bufio"
-	"fmt"
-	"log"
 	"os"
+	"log"
+	"fmt"
 	"strconv"
 )
 
-func main() {
+func main()  {
+
 	file, err := os.Open("input.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
-	var subtotal int
-	var grandtotal int
+	answer1 := 0
+	answer2 := 0
 	for scanner.Scan() {
-		input, _ := strconv.Atoi(scanner.Text())
-		fuel := Fuel(input)
-		subtotal += fuel
-		grandtotal += ExtFuel(fuel)
+		mass, _ := strconv.Atoi(scanner.Text())
+		answer1 += Fuel(mass)
+		answer2 += ExtFuel(mass)
 	}
 
-	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("Initial fuel needed ::: %d \n", subtotal)
-	fmt.Printf("Total fuel needed   ::: %d \n", grandtotal)
+	fmt.Printf("Answer to first problem : %d \n", answer1)
+	fmt.Printf("Answer to second problem : %d \n", answer2)
+
 }
 
-// Fuel computes for the initial fuel needed according to problem 1.
 func Fuel(mass int) int {
-	result := mass/3 - 2
-	return result
+	return mass / 3 - 2
 }
 
-// ExtFuel is short for "Extended Fuel". This provides the answer to problem 2.
-func ExtFuel(fuel int) int {
-	final := fuel
-	result := fuel
-	for result > 0 {
-		result = Fuel(result)
-		if result > 0 {
-			final += result
+func ExtFuel(mass int) int  {
+	total := 0
+	fuel := mass
+	for fuel > 0 {
+		fuel = Fuel(fuel)
+		if fuel > 0 {
+			total += fuel
 		}
 	}
-	return final
+	return total
 }
