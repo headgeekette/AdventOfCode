@@ -27,7 +27,7 @@ func TestFuel(t *testing.T) {
 func TestExtFuel(t *testing.T) {
 	tests := []struct {
 		input int
-		want int
+		want  int
 	}{
 		{14, 2},
 		{1969, 966},

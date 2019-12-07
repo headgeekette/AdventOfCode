@@ -2,13 +2,13 @@ package main
 
 import (
 	"bufio"
-	"os"
-	"log"
 	"fmt"
+	"log"
+	"os"
 	"strconv"
 )
 
-func main()  {
+func main() {
 
 	file, err := os.Open("input.txt")
 	if err != nil {
@@ -30,11 +30,13 @@ func main()  {
 
 }
 
+// Fuel computes for the fuel needed per single mass
 func Fuel(mass int) int {
-	return mass / 3 - 2
+	return mass/3 - 2
 }
 
-func ExtFuel(mass int) int  {
+// ExtFuel computes for the fuel needed per module
+func ExtFuel(mass int) int {
 	total := 0
 	fuel := mass
 	for fuel > 0 {
